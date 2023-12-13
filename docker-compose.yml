@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./precios-historicos.csv:/tmp/precios-historicos.csv
+    environment:
+      MYSQL_ROOT_PASSWORD: argentina1982
+      MYSQL_DATABASE: grafana
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
